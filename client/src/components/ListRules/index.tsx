@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Rule } from '../../interfaces'
 import Modal from '../RuleModal'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Style, MouseEvent } from '../../interfaces'
+import { Style, MouseEvent, Rule, DataRule } from '../../interfaces'
 
 const MultiActionAreaCard = () => {
 
   const [ rules, setRules ] = useState<Rule | undefined>(undefined);
   const [ idRule, setIdRule ] = useState('');
+  const [ dataRule, setDataRule ] = useState<DataRule | undefined>(undefined);
   const [ open, setOpen ] = useState(false);
 
   const style: Style = {
@@ -50,10 +50,23 @@ const MultiActionAreaCard = () => {
       console.error(e);
     }
   }, []);
+  
+    const getById = useCallback(async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/rules/${idRule}`)
+        const jsonResponse = await response.json()
+        setDataRule(jsonResponse.data)
+      } catch (e) {
+        console.error(e);
+      }
+    }, []);
 
   useEffect(() => {
     rules === undefined && getRules();
-  }, [rules]);
+    if(idRule !== '') {
+      getById()
+    }
+  }, [getById, getRules, idRule, rules]);
  
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -75,7 +88,7 @@ const MultiActionAreaCard = () => {
           })
         }
       </Grid>
-      <Modal open={open} handleClose={handleClose} id={idRule} />
+      {dataRule !== undefined && <Modal open={open} handleClose={handleClose} dataRule={dataRule} />}
     </Box>
   );
 }

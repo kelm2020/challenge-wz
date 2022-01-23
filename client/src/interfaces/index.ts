@@ -106,6 +106,12 @@ interface IModal {
   id: string
 }
 
+interface IRuleModal {
+  open: boolean
+  handleClose: () => void
+  dataRule: DataRule
+}
+
 export type { 
   Alerts, 
   DataAlerts, 
@@ -117,5 +123,6 @@ export type {
   Style,
   DataRule,
   MouseEvent,
-  IModal
+  IModal,
+  IRuleModal
 }

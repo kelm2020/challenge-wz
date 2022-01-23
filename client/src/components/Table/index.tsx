@@ -56,21 +56,21 @@ const BasicTable: FC = () => {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell align="right">Date</TableCell>
-                <TableCell align="right">Rule</TableCell>
-                <TableCell align="right">Agent</TableCell>
+                <TableCell align="center">ID</TableCell>
+                <TableCell align="center">Date</TableCell>
+                <TableCell align="center">Rule</TableCell>
+                <TableCell align="center">Agent</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {alerts && alerts.data.map((alert) => (
                 <TableRow key={alert._id}>
-                  <TableCell component="th" scope="row">
+                  <TableCell align="center" component="th" scope="row">
                     {alert._id}
                   </TableCell>
-                  <TableCell align="right">{alert._source.timestamp}</TableCell>
-                  <TableCell align="right">{alert._source.rule.description}</TableCell>
-                  <TableCell align="right">{alert._source.agent.name}</TableCell>
+                  <TableCell align="center">{alert._source.timestamp}</TableCell>
+                  <TableCell align="center">{alert._source.rule.description}</TableCell>
+                  <TableCell align="center">{alert._source.agent.name}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

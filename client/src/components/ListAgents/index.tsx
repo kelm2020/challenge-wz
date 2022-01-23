@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Agents } from '../../interfaces'
-import Modal from '../AgentModal'
+import AgentModal from '../AgentModal'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { MouseEvent } from "../../interfaces";
@@ -49,7 +49,7 @@ const MultiActionAreaCard = () => {
 
   useEffect(() => {
     agents === undefined && getAgents();
-  }, [agents]);
+  }, []);
  
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -70,7 +70,7 @@ const MultiActionAreaCard = () => {
           })
         }
       </Grid>
-      <Modal open={open} handleClose={handleClose} id={idAgent}/>
+      <AgentModal open={open} handleClose={handleClose} id={idAgent}/>
     </Box>
   );
 }
