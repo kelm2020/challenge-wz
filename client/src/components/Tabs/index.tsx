@@ -7,7 +7,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Table from '../Table';
-import List from '../List';
+import ListAgents from '../ListAgents/index';
+import ListRules from '../ListRules/index';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -81,10 +83,10 @@ export default function FullWidthTabs() {
           <Table />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <List />
+          <ListAgents />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <List />
+          <ListRules />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
           DASHBOARD

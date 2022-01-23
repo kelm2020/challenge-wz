@@ -163,7 +163,7 @@ const getRulesById = ({ data, id }) => {
     return {
         status: 200,
         json: {
-            data: alertsByRule[0]._source.rule,
+            ...alertsByRule[0]._source.rule,
             total_alerts: alertsByRule.length,
             alerts: alertsByRule
         }

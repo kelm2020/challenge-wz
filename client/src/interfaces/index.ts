@@ -1,4 +1,5 @@
 interface Rule {
+  [x: string]: any;
   "firedtimes": number
   "mail": boolean
   "level": number
@@ -66,4 +67,55 @@ interface DataAgent {
   alerts: Array<DataAlerts>
 }
 
-export type { Alerts, DataAlerts, Agents, DataAgents, DataAgent }
+type FlexDirection = "column" | "inherit" | "-moz-initial" | "initial" | "revert" | "unset" | "column-reverse" | "row" | "row-reverse" | undefined;
+
+type Style = {
+  flexDirection: FlexDirection
+  display: string,
+  background: string, 
+  borderRadius: string,
+  color: string,
+  width: string,
+  height: string,
+  minHeight: string,
+  boxShadow: string,
+  justifyContent: string,
+  alignItems: string,
+  fontWeight: string,
+  fontSize: string,
+  cursor: string,
+  lineHeight: string
+}
+
+interface DataRule extends Rule {
+  total_alerts: number,
+  alerts: Array<DataAlerts>
+}
+
+interface MouseEventTarget extends EventTarget {
+  id: number
+}
+
+interface MouseEvent extends React.MouseEvent<HTMLDivElement> {
+  target: MouseEventTarget
+}
+
+interface IModal {
+  open: boolean
+  handleClose: () => void
+  id: string
+}
+
+export type { 
+  Alerts, 
+  DataAlerts, 
+  Agents, 
+  DataAgents, 
+  DataAgent, 
+  Rule, 
+  Source, 
+  Style,
+  DataRule,
+  MouseEvent,
+  IModal
+}

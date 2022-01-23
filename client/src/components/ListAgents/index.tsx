@@ -1,10 +1,11 @@
-import React, {useState, useEffect, useCallback, FC} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Agents } from '../../interfaces'
-import Modal from '../Modal/Modal'
+import Modal from '../AgentModal'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { MouseEvent } from "../../interfaces";
 
-const MultiActionAreaCard: FC = () => {
+const MultiActionAreaCard = () => {
 
   const [ agents, setAgents ] = useState<Agents | undefined>(undefined);
   const [ idAgent, setIdAgent ] = useState('');
@@ -28,14 +29,6 @@ const MultiActionAreaCard: FC = () => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  interface MouseEventTarget extends EventTarget {
-    id: number
-  }
-  
-  interface MouseEvent extends React.MouseEvent<HTMLDivElement> {
-    target: MouseEventTarget
-  }
 
   const handleOnClick = (e: MouseEvent) => {
     e.preventDefault()
