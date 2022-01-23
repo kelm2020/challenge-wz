@@ -9,8 +9,7 @@ import Box from '@mui/material/Box';
 import Table from '../Table';
 import ListAgents from '../ListAgents/index';
 import ListRules from '../ListRules/index';
-
-
+import Sunburst from '../../charts/Sunburst'
 interface TabPanelProps {
   children?: React.ReactNode;
   dir?: string;
@@ -89,7 +88,7 @@ export default function FullWidthTabs() {
           <ListRules />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          DASHBOARD
+          <Sunburst />
         </TabPanel>
       </SwipeableViews>
     </Box>
