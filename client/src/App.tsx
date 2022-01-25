@@ -1,11 +1,10 @@
-import Tabs from './components/Tabs'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Navigation } from './components/Navigation/index';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Tabs />
-    </BrowserRouter>
+    <>
+      <Navigation />
+    </>
   );
 }
 
