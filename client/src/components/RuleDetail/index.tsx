@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useCallback, FC } from 'react';
-import Box from '@mui/material/Box';
 import { DataRule } from '../../interfaces'
 import { usePrevious } from '../../utils/usePrevious';
 import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
+import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
+import CardActions from '@mui/material/CardActions';
 
 const style = {
-  position: 'absolute' as 'absolute',
-  top: '61%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 300,
-  maxHeight: 400,
-  bgcolor: 'background.paper',
+  width: '100%',
+  maxWidth: '800px',
+  maxHeight: '800px',
   border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+  borderRadius: '8px',
+  marginLeft: 'auto',
+  marginRight: 'auto'
 };
 
 const styleTextArea = { width: '100%', height: '400px' };
@@ -37,23 +36,47 @@ const BasicModal: FC= () => {
     }
   }, [id]);
 
+  // const prevId = usePrevious(id);
+
+  // useEffect(() => {
+  //   if (dataRule === undefined) {
+  //     get()
+  //   }
+  // }, [dataRule]);
+
+  
+
+
+
   const prevId = usePrevious(id);
 
+  const handleOnClick = (e) => {
+    e.preventDefault()
+    window && window.history.back();
+  }
+
   useEffect(() => {
-    if (dataRule === undefined) {
+    if(prevId !== id) {
       get()
     }
-  }, [dataRule]);
+  }, [id, prevId]);
 
   return (
-    <Box id='detail-rule' sx={style}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px' }}>
+    <Card id='detail-rule' style={style} sx={{ minWidth: 275 }}>
+      <>
       {
         dataRule === undefined ? <CircularProgress /> :
         <textarea style={styleTextArea}>
           {JSON.stringify(dataRule, undefined, 4)}
         </textarea>
       }
-    </Box>
+        </>
+      <CardActions>
+          <Button onClick={handleOnClick} size="small">Atras</Button>
+        </CardActions>
+    </Card>
+    </div>
   );
 };
 
