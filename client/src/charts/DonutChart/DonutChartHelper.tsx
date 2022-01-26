@@ -40,7 +40,7 @@ export default class DonutChartHelper {
             return d.name
           }) as unknown) as string
         )
-        .range(d3.schemeCategory10)
+        .range(["#0081EA", "#00EAB8", "#6DE0F3", "#A000FF", "#BC75F7", "#F10811", "#EA0077"])
     }
   }
 };
