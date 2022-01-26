@@ -9,20 +9,12 @@ import TableRow from "@material-ui/core/TableRow";
 import TablePagination from '@mui/material/TablePagination';
 import Paper from "@material-ui/core/Paper";
 import { Alerts } from '../../interfaces'
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650
-  }
-});
+import { CircularProgress } from "@material-ui/core";
 
 const BasicTable: FC = () => {
   const [ alerts, setAlerts ] = useState<Alerts | undefined>(undefined);
   const [page, setPage] = React.useState(0);
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const getAlerts = async () => {
     try {
@@ -35,27 +27,39 @@ const BasicTable: FC = () => {
   }
 
   useEffect(() => {
-    getAlerts();
-  }, []);
+    if (alerts === undefined) {
+      getAlerts();
+    }
+  }, [alerts]);
 
-  const classes = useStyles();
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+  console.log('page', page)
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
-    <>
-      <Paper style={{ marginTop: '20px' }}>
-        <TableContainer>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
+    alerts === undefined ? <CircularProgress /> : 
+    <Paper style={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
               <TableRow>
                 <TableCell align="center">ID</TableCell>
                 <TableCell align="center">Date</TableCell>
                 <TableCell align="center">Rule</TableCell>
                 <TableCell align="center">Agent</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {alerts && alerts.data.map((alert) => (
-                <TableRow key={alert._id}>
+          </TableHead>
+          <TableBody>
+            {alerts && alerts.data && alerts.data
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((alert) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={alert._id}>
                   <TableCell align="center" component="th" scope="row">
                     {alert._id}
                   </TableCell>
@@ -63,22 +67,84 @@ const BasicTable: FC = () => {
                   <TableCell align="center">{alert._source.rule.description}</TableCell>
                   <TableCell align="center">{alert._source.agent.name}</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {alerts && alerts.data.length > 0 && (
-          <TablePagination
-            component="div"
-            count={alerts.data.length}
-            rowsPerPage={5}
-            page={page}
-            onPageChange={handleChangePage}
-          />)
-        }
-      </Paper>
-    </>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[2, 5, 10]}
+        component="div"
+        count={alerts.data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 }
 
 export default BasicTable;
+
+// import * as React from 'react';
+// import Paper from '@mui/material/Paper';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TablePagination from '@mui/material/TablePagination';
+// import TableRow from '@mui/material/TableRow';
+
+// export default function StickyHeadTable() {
+//   const [page, setPage] = React.useState(0);
+//   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+//   const handleChangePage = (event: unknown, newPage: number) => {
+//     setPage(newPage);
+//   };
+
+//   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     setRowsPerPage(+event.target.value);
+//     setPage(0);
+//   };
+
+//   return (
+//     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+//       <TableContainer>
+//         <Table stickyHeader aria-label="sticky table">
+//           <TableHead>
+//               <TableRow>
+//                 <TableCell align="center">ID</TableCell>
+//                 <TableCell align="center">Date</TableCell>
+//                 <TableCell align="center">Rule</TableCell>
+//                 <TableCell align="center">Agent</TableCell>
+//               </TableRow>
+//           </TableHead>
+//           <TableBody>
+//               {alerts && alerts.data.map((alert) => (
+//                 <TableRow key={alert._id}>
+//                   <TableCell align="center" component="th" scope="row">
+//                     {alert._id}
+//                   </TableCell>
+//                   <TableCell align="center">{alert._source.timestamp}</TableCell>
+//                   <TableCell align="center">{alert._source.rule.description}</TableCell>
+//                   <TableCell align="center">{alert._source.agent.name}</TableCell>
+//                 </TableRow>
+//               ))}
+//           </TableBody>
+//         </Table>
+//       </TableContainer>
+//       <TablePagination
+//         rowsPerPageOptions={[10, 15, 20]}
+//         component="div"
+//         count={rows.length}
+//         rowsPerPage={rowsPerPage}
+//         page={page}
+//         onPageChange={handleChangePage}
+//         onRowsPerPageChange={handleChangeRowsPerPage}
+//       />
+//     </Paper>
+//   );
+// }
