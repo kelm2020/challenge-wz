@@ -11,7 +11,7 @@
   import AgentDetail from '../AgentDetail';
   import RuleDetail from '../RuleDetail';
   import AlertDetail from '../AlertDetail';
-  
+
   import './index.scss';
 
   export const Navigation = () => {
