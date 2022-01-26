@@ -116,6 +116,31 @@ interface IRuleModal {
   dataRule: DataRule
 }
 
+type DataChart = {
+  name?: string,
+  value?: number
+}
+
+type Dimensions = {
+  width: number
+  height: number
+  margin: {
+    left: number
+    right: number
+    top: number
+    bottom: number
+  }
+  boundedWidth: number
+  boundedHeight: number
+}
+
+interface IDonutChartProps {
+  dimensions: Dimensions
+  data: DataChart[]
+  propertiesNames: string[]
+}
+
+
 export type { 
   Alerts, 
   DataAlerts, 
@@ -129,5 +154,8 @@ export type {
   MouseEvent,
   MouseEventImg,
   IModal,
-  IRuleModal
+  IRuleModal,
+  DataChart,
+  Dimensions,
+  IDonutChartProps
 }

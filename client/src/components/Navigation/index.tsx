@@ -7,7 +7,7 @@
   import Table from '../Table';
   import ListAgents from '../ListAgents';
   import ListRules from '../ListRules';
-  import Sunburst from '../../charts/Sunburst';
+  import DonutChart from '../../charts/DonutChart';
   import AgentDetail from '../AgentDetail';
   import RuleDetail from '../RuleDetail';
 
@@ -28,7 +28,7 @@
             <Route path="/alerts" element={<Table />} />
             <Route path="/agents" element={<ListAgents />} />
             <Route path="/rules" element={<ListRules />} />
-            <Route path="/dashboard" element={<Sunburst />} />
+            <Route path="/dashboard" element={<DonutChart />} />
             <Route path="/agents/:id" element={<AgentDetail />} />
             <Route path="/rules/:id" element={<RuleDetail />} />
           </Routes>
