@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback, FC } from 'react';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import { DataAgent, IModal } from '../../interfaces'
+import { CircularProgress } from '@material-ui/core';
+import { DataAgent } from '../../interfaces'
 import { usePrevious } from '../../utils/usePrevious';
+import { useParams } from 'react-router-dom';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -19,13 +20,14 @@ const style = {
 
 const styleTextArea = { width: '100%', height: '400px' };
 
-const AgentModal: FC<IModal> = (({open, handleClose, id}: IModal) => {
+const AgentModal: FC = () => {
   const [ dataAgent, setDataAgent ] = useState<DataAgent | undefined>(undefined);
 
-console.log('id+++', id)
-  const handleCloseModal = () => {
-    handleClose()
-  }
+  const params = useParams();
+  console.log('params', params);
+  const { id } = params;
+ 
+  console.log('id+++', id)
 
   const get = useCallback(async () => {
     try {
@@ -46,23 +48,15 @@ console.log('id+++', id)
   }, [id, prevId]);
 
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          {
-            <textarea style={styleTextArea}>
-              {JSON.stringify(dataAgent, undefined, 4)}
-            </textarea>
-          }
-        </Box>
-      </Modal>
-    </div>
+    <Box sx={style}>
+      {
+        dataAgent === undefined ? <CircularProgress /> :
+        <textarea style={styleTextArea}>
+          {JSON.stringify(dataAgent, undefined, 4)}
+        </textarea>
+      }
+    </Box>
   );
-})
+};
 
 export default AgentModal;

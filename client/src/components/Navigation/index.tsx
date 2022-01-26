@@ -8,6 +8,8 @@
   import ListAgents from '../ListAgents';
   import ListRules from '../ListRules';
   import Sunburst from '../../charts/Sunburst';
+  import AgentDetail from '../AgentDetail';
+  import RuleDetail from '../RuleDetail';
 
   import './index.scss';
 
@@ -22,10 +24,13 @@
             <NavLink to="/dashboard" className={'nav-bar__item'} children={'DASHBOARD'}></NavLink> 
           </nav>
           <Routes>
+            <Route path="/" element={<Table />} />
             <Route path="/alerts" element={<Table />} />
             <Route path="/agents" element={<ListAgents />} />
             <Route path="/rules" element={<ListRules />} />
-            <Route path="/dashboard" element={<Sunburst />} />  
+            <Route path="/dashboard" element={<Sunburst />} />
+            <Route path="/agents/:id" element={<AgentDetail />} />
+            <Route path="/rules/:id" element={<RuleDetail />} />
           </Routes>
         </div>
       </BrowserRouter>

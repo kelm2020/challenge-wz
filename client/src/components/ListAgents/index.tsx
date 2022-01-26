@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Agents } from '../../interfaces'
-import AgentModal from '../AgentModal'
+import { Agents } from '../../interfaces';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { MouseEvent } from "../../interfaces";
+import { useNavigate } from 'react-router-dom';
 
 const MultiActionAreaCard = () => {
 
   const [ agents, setAgents ] = useState<Agents | undefined>(undefined);
-  const [ idAgent, setIdAgent ] = useState('');
-  const [ open, setOpen ] = useState(false);
 
   const style = {
     display: 'flex',
@@ -27,14 +25,13 @@ const MultiActionAreaCard = () => {
     cursor: 'pointer'
   };
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+  const handleNavigate = (id) => navigate(`/agents/${id}`);
 
   const handleOnClick = (e: MouseEvent) => {
     e.preventDefault()
     const idString = e.target.id.toString()
-    setIdAgent(idString)
-    handleOpen()
+    handleNavigate(idString)
   }
 
   const getAgents = useCallback(async () => {
@@ -52,7 +49,7 @@ const MultiActionAreaCard = () => {
   }, []);
  
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} style={{ padding: '20px' }} >
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {
           agents && agents.data.map((agent)=> {
@@ -70,9 +67,8 @@ const MultiActionAreaCard = () => {
           })
         }
       </Grid>
-      <AgentModal open={open} handleClose={handleClose} id={idAgent}/>
     </Box>
   );
-}
+};
 
-  export default MultiActionAreaCard;
+export default MultiActionAreaCard;

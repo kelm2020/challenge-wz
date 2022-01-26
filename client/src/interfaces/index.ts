@@ -100,6 +100,10 @@ interface MouseEvent extends React.MouseEvent<HTMLDivElement> {
   target: MouseEventTarget
 }
 
+interface MouseEventImg extends React.MouseEvent<HTMLImageElement> {
+  target: MouseEventTarget
+}
+
 interface IModal {
   open: boolean
   handleClose: () => void
@@ -123,6 +127,7 @@ export type {
   Style,
   DataRule,
   MouseEvent,
+  MouseEventImg,
   IModal,
   IRuleModal
 }

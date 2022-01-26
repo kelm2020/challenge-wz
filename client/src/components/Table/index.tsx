@@ -18,29 +18,20 @@ const useStyles = makeStyles({
 
 const BasicTable: FC = () => {
   const [ alerts, setAlerts ] = useState<Alerts | undefined>(undefined);
-  const [ loading, setLoading ] = useState(false);
   const [page, setPage] = React.useState(0);
-
-  const handleSetLoading = () => {
-    setLoading(!loading)
-  }
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
   const getAlerts = async () => {
-    console.log('entre')
-    handleSetLoading();
     try {
       const response = await fetch('http://localhost:5000/alerts')
       const data = await response.json()
       setAlerts(data)
     } catch (e) {
       console.error(e);
-      handleSetLoading();
     }
-    handleSetLoading();
   }
 
   useEffect(() => {
@@ -51,7 +42,7 @@ const BasicTable: FC = () => {
 
   return (
     <>
-      <Paper>
+      <Paper style={{ marginTop: '20px' }}>
         <TableContainer>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
