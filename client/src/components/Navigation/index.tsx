@@ -10,7 +10,8 @@
   import DonutChart from '../../charts/DonutChart';
   import AgentDetail from '../AgentDetail';
   import RuleDetail from '../RuleDetail';
-
+  import AlertDetail from '../AlertDetail';
+  
   import './index.scss';
 
   export const Navigation = () => {
@@ -26,6 +27,7 @@
           <Routes>
             <Route path="/" element={<Table />} />
             <Route path="/alerts" element={<Table />} />
+            <Route path="/alerts/:id" element={<AlertDetail />} />
             <Route path="/agents" element={<ListAgents />} />
             <Route path="/rules" element={<ListRules />} />
             <Route path="/dashboard" element={<DonutChart />} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, FC } from 'react';
 import Box from '@mui/material/Box';
 import { CircularProgress } from '@material-ui/core';
-import { DataAgent } from '../../interfaces'
+import { Alerts } from '../../interfaces'
 import { usePrevious } from '../../utils/usePrevious';
 import { useParams } from 'react-router-dom';
 
@@ -20,16 +20,17 @@ const style = {
 
 const styleTextArea = { width: '100%', height: '400px' };
 
-const AgentModal: FC = () => {
-  const [ dataAgent, setDataAgent ] = useState<DataAgent | undefined>(undefined);
+const AlertModal: FC = () => {
+  const [ dataAlert, setDataAlert ] = useState<Alerts | undefined>(undefined);
 
   const params = useParams();
   const { id } = params;
+ 
   const get = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:5000/agents/${id}`)
+      const response = await fetch(`http://localhost:5000/alerts/${id}`)
       const jsonResponse = await response.json()
-      setDataAgent(jsonResponse.data)
+      setDataAlert(jsonResponse.data)
     } catch (e) {
       console.error(e);
     }
@@ -46,13 +47,13 @@ const AgentModal: FC = () => {
   return (
     <Box sx={style}>
       {
-        dataAgent === undefined ? <CircularProgress /> :
+        dataAlert === undefined ? <CircularProgress /> :
         <textarea style={styleTextArea}>
-          {JSON.stringify(dataAgent, undefined, 4)}
+          {JSON.stringify(dataAlert, undefined, 4)}
         </textarea>
       }
     </Box>
   );
 };
 
-export default AgentModal;
+export default AlertModal;

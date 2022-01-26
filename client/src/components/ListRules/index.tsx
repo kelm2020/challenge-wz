@@ -70,7 +70,6 @@ function TitlebarImageList() {
 
   const handleOnClick = (e: MouseEventImg) => {
     e.preventDefault()
-    console.log('id e rule', e.target.id)
     const idString = e.target.id.toString()
     handleNavigate(idString)
   }
@@ -79,7 +78,6 @@ function TitlebarImageList() {
     try {
       const response = await fetch('http://localhost:5000/rules')
       const data = await response.json()
-      console.log(data,'hola')
       setRules(data)
     } catch (e) {
       console.error(e);

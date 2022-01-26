@@ -3,13 +3,10 @@ const getAlerts = ({ data, offset = 0, limit = 10, id }) => {
     const arrLimit = Number(limit)
         // id = ['23Gmr3QB4YtWQbLv1inX', '4HGmr3QB4YtWQbLv1inX', '53Gmr3QB4YtWQbLv1inX']
     if (id) {
-        console.log(id, 'id')
         let alertsByIds = []
         id.forEach((element) => {
             data.forEach((el) => {
-                console.log(el, 'split')
                 if ((element) == (el._id)) {
-                    console.log('entre')
                     alertsByIds.push(el)
                 }
             })
@@ -41,6 +38,22 @@ const getAlerts = ({ data, offset = 0, limit = 10, id }) => {
         }
     }
 };
+
+const getAlertsById = ({ data, id }) => {
+    const alertsById = data.filter((element) => {
+        if (element._id === id) {
+            return element
+        }
+    })
+    
+                return {
+                    status: 200,
+                    json: {
+            total_items: 1,
+            data: alertsById
+        }
+    }
+}
 
 const getAgents = ({ data, offset = 0, limit = 10 }) => {
     const arrOffset = Number(offset)
@@ -173,6 +186,7 @@ const getRulesById = ({ data, id }) => {
 
 module.exports = {
     getAlerts,
+    getAlertsById,
     getAgents,
     getAgentsById,
     getRules,

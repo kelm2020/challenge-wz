@@ -18,6 +18,11 @@ router.get('/alerts', (req, res) => {
     return res.status(response.status).json(response.json)
 })
 
+router.get('/alerts/:id', (req, res) => {
+    const response = services.getAlertsById({ data: alerts, id: req.params.id })
+    return res.status(response.status).json(response.json)
+})
+
 router.get('/agents', (req, res) => {
     const response = services.getAgents({ data: alerts, ...req.query })
     return res.status(200).json(response)

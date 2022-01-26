@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, useCallback} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,14 +9,36 @@ import TableRow from "@material-ui/core/TableRow";
 import TablePagination from '@mui/material/TablePagination';
 import Paper from "@material-ui/core/Paper";
 import { Alerts } from '../../interfaces'
-import { CircularProgress } from "@material-ui/core";
+
+import { MouseEventButton} from "../../interfaces";
+import { useNavigate } from 'react-router-dom';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650
+  },
+  button:{
+    background: '#00a9e5',
+    color: '#ffffff',
+    borderRadius: '6px'
+  }
+});
 
 const BasicTable: FC = () => {
   const [ alerts, setAlerts ] = useState<Alerts | undefined>(undefined);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const getAlerts = async () => {
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const handleNavigate = (id) => navigate(`/alerts/${id}`);
+  const buttonHandler = (event: MouseEventButton) => {
+    event.preventDefault();
+    const idString = event.target.id.toString()
+    handleNavigate(idString)
+  }
+
+  const getAlerts = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:5000/alerts')
       const data = await response.json()
@@ -24,9 +46,10 @@ const BasicTable: FC = () => {
     } catch (e) {
       console.error(e);
     }
-  }
+  }, []);
 
   useEffect(() => {
+<<<<<<< Updated upstream
     if (alerts === undefined) {
       getAlerts();
     }
@@ -41,6 +64,11 @@ const BasicTable: FC = () => {
     setPage(0);
   };
 
+=======
+    alerts === undefined && getAlerts();
+  }, []);
+
+>>>>>>> Stashed changes
   return (
     alerts === undefined ? <CircularProgress /> : 
     <Paper style={{ width: '100%', overflow: 'hidden' }}>
@@ -48,11 +76,13 @@ const BasicTable: FC = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
               <TableRow>
+                <TableCell align="center">Detail</TableCell>
                 <TableCell align="center">ID</TableCell>
                 <TableCell align="center">Date</TableCell>
                 <TableCell align="center">Rule</TableCell>
                 <TableCell align="center">Agent</TableCell>
               </TableRow>
+<<<<<<< Updated upstream
           </TableHead>
           <TableBody>
             {alerts && alerts.data && alerts.data
@@ -60,6 +90,13 @@ const BasicTable: FC = () => {
             .map((alert) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={alert._id}>
+=======
+            </TableHead>
+            <TableBody>
+              {alerts && alerts.data.map((alert) => (
+                <TableRow key={alert._id}>
+                  <TableCell align="center"><button className={classes.button} id={alert._id} onClick={buttonHandler}>Detail</button></TableCell>
+>>>>>>> Stashed changes
                   <TableCell align="center" component="th" scope="row">
                     {alert._id}
                   </TableCell>
