@@ -9,7 +9,9 @@ import TablePagination from '@mui/material/TablePagination';
 import Paper from "@material-ui/core/Paper";
 import { CircularProgress } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import { Alerts, MouseEventButton } from '../../interfaces'
+import { Alerts, MouseEventButton } from '../../interfaces';
+
+import './index.scss';
 
 const BasicTable: FC = () => {
   const [ alerts, setAlerts ] = useState<Alerts | undefined>(undefined);
@@ -52,7 +54,7 @@ const BasicTable: FC = () => {
 
   return (
     alerts === undefined ? <CircularProgress /> : 
-    <Paper style={{ width: '100%', overflow: 'hidden' }}>
+    <Paper className="table-container">
       <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -70,7 +72,7 @@ const BasicTable: FC = () => {
             .map((alert) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={alert._id}>
-                  <TableCell align="center"><button id={alert._id} onClick={handleGetBack}>Detail</button></TableCell>
+                  <TableCell align="center"><button className="table-container__button" id={alert._id} onClick={handleGetBack}>Detail</button></TableCell>
                   <TableCell align="center" component="th" scope="row">
                     {alert._id}
                   </TableCell>

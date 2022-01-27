@@ -7,17 +7,7 @@ import { Alerts } from '../../interfaces'
 import { usePrevious, handleGetBack } from '../../utils';
 import { useParams } from 'react-router-dom';
 
-const style = {
-  width: '100%',
-  maxWidth: '800px',
-  maxHeight: '800px',
-  border: '2px solid #000',
-  borderRadius: '8px',
-  marginLeft: 'auto',
-  marginRight: 'auto'
-};
-
-const styleTextArea = { width: '100%', height: '400px' };
+import './index.scss';
 
 const AlertModal: FC = () => {
   const [ dataAlert, setDataAlert ] = useState<Alerts | undefined>(undefined);
@@ -44,18 +34,18 @@ const AlertModal: FC = () => {
   }, [id, prevId]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px' }}>
-      <Card style={style} sx={{ minWidth: 275 }}>
+    <div className="detail-container">
+      <Card id='alert-detail' className="detail-container__item" sx={{ minWidth: 275 }}>
         <>
           {
             dataAlert === undefined ? <CircularProgress /> :
-            <textarea style={styleTextArea}>
+            <textarea className="detail-container__text-area">
               {JSON.stringify(dataAlert, undefined, 4)}
             </textarea>
           }
         </>
         <CardActions>
-          <Button onClick={handleGetBack} size="small">Atras</Button>
+          <Button className="detail-container__button" onClick={handleGetBack} size="small">Atras</Button>
         </CardActions>
       </Card>
     </div>

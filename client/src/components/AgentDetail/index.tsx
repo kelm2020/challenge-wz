@@ -7,17 +7,7 @@ import { useParams } from 'react-router-dom';
 import { DataAgent, IDetail } from '../../interfaces'
 import { usePrevious } from '../../utils';
 
-const style = {
-  width: '100%',
-  maxWidth: '800px',
-  maxHeight: '800px',
-  border: '2px solid #000',
-  borderRadius: '8px',
-  marginLeft: 'auto',
-  marginRight: 'auto'
-};
-
-const styleTextArea = { width: '100%', height: '400px' };
+import './index.scss';
 
 const AgentModal: FC<IDetail> = ({eventHandler}: IDetail) => {
   const [ dataAgent, setDataAgent ] = useState<DataAgent | undefined>(undefined);
@@ -43,18 +33,18 @@ const AgentModal: FC<IDetail> = ({eventHandler}: IDetail) => {
   }, [id, prevId]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px' }}>
-      <Card style={style} sx={{ minWidth: 275 }}>
+    <div className="detail-container">
+      <Card id='agent-detail' className="detail-container__item" sx={{ minWidth: 275 }}>
         <>
           {
             dataAgent === undefined ? <CircularProgress /> :
-            <textarea style={styleTextArea}>
+            <textarea className="detail-container__text-area">
               {JSON.stringify(dataAgent, undefined, 4)}
             </textarea>
           }
         </>
         <CardActions>
-          <Button onClick={eventHandler} size="small">Atras</Button>
+          <Button className="detail-container__button" onClick={eventHandler} size="small">Atras</Button>
         </CardActions>
       </Card>
     </div>

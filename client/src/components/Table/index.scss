@@ -1,0 +1,19 @@
+.table-container {
+    width: 100%;
+    overflow: hidden;
+    &__button {
+        position: relative;
+        color: #00a9e5;
+        font-weight: 600;
+        border: 2px solid #00a9e5;
+        border-radius: 8px;
+        text-transform: uppercase;
+        background-color: transparent;
+        cursor: pointer;
+        transition: 1.5s;
+    }
+    &__button:hover {
+        box-shadow: 0 5px 5px 0 #00a9e5 inset, 0 5px 50px 0 #00a9e5, 0 5px 5px 0 #00a9e5 inset, 0 5px 50px 0 #00a9e5;
+        text-shadow: 0 0 5px #00a9e5;
+    }
+}

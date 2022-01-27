@@ -7,17 +7,7 @@ import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 
-const style = {
-  width: '100%',
-  maxWidth: '800px',
-  maxHeight: '800px',
-  border: '2px solid #000',
-  borderRadius: '8px',
-  marginLeft: 'auto',
-  marginRight: 'auto'
-};
-
-const styleTextArea = { width: '100%', height: '400px' };
+import './index.scss';
 
 const BasicModal: FC= () => {
 
@@ -45,18 +35,18 @@ const BasicModal: FC= () => {
   }, [id, prevId]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px' }}>
-    <Card id='detail-rule' style={style} sx={{ minWidth: 275 }}>
+    <div className="detail-container">
+    <Card id='rule-detail' className="detail-container__item" sx={{ minWidth: 275 }}>
       <>
       {
         dataRule === undefined ? <CircularProgress /> :
-        <textarea style={styleTextArea}>
+        <textarea className="detail-container__text-area">
           {JSON.stringify(dataRule, undefined, 4)}
         </textarea>
       }
         </>
       <CardActions>
-          <Button onClick={handleGetBack} size="small">Atras</Button>
+          <Button className="detail-container__button" onClick={handleGetBack} size="small">Atras</Button>
         </CardActions>
     </Card>
     </div>

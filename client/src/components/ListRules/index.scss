@@ -1,0 +1,11 @@
+.list {
+    margin: 20px;
+    &__image {
+        border-radius: 8px;
+        cursor: pointer
+    }
+    &__image-description {
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px
+    }
+}
