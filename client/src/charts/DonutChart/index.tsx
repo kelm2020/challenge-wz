@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { CircularProgress } from '@material-ui/core'
 import { DataChart, Dimensions } from '../../interfaces'
-import useWindowDimensions from '../../utils/WindowDimensions'
+import { useWindowDimensions } from '../../utils'
 
 import DonutChart from './DonutChartComponent'
 import ChartHelper from './DonutChartHelper'

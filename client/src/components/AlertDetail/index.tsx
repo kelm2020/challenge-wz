@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import { CircularProgress } from '@material-ui/core';
 import { Alerts } from '../../interfaces'
-import { usePrevious } from '../../utils/usePrevious';
+import { usePrevious, handleGetBack } from '../../utils';
 import { useParams } from 'react-router-dom';
 
 const style = {
@@ -37,11 +37,6 @@ const AlertModal: FC = () => {
 
   const prevId = usePrevious(id);
 
-  const handleOnClick = (e) => {
-    e.preventDefault()
-    window && window.history.back();
-  }
-
   useEffect(() => {
     if(prevId !== id) {
       get()
@@ -60,7 +55,7 @@ const AlertModal: FC = () => {
           }
         </>
         <CardActions>
-          <Button onClick={handleOnClick} size="small">Atras</Button>
+          <Button onClick={handleGetBack} size="small">Atras</Button>
         </CardActions>
       </Card>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, FC } from 'react';
 import { DataRule } from '../../interfaces'
-import { usePrevious } from '../../utils/usePrevious';
+import { usePrevious, handleGetBack } from '../../utils';
 import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
 import Card from '@mui/material/Card';
@@ -36,24 +36,7 @@ const BasicModal: FC= () => {
     }
   }, [id]);
 
-  // const prevId = usePrevious(id);
-
-  // useEffect(() => {
-  //   if (dataRule === undefined) {
-  //     get()
-  //   }
-  // }, [dataRule]);
-
-  
-
-
-
   const prevId = usePrevious(id);
-
-  const handleOnClick = (e) => {
-    e.preventDefault()
-    window && window.history.back();
-  }
 
   useEffect(() => {
     if(prevId !== id) {
@@ -73,7 +56,7 @@ const BasicModal: FC= () => {
       }
         </>
       <CardActions>
-          <Button onClick={handleOnClick} size="small">Atras</Button>
+          <Button onClick={handleGetBack} size="small">Atras</Button>
         </CardActions>
     </Card>
     </div>

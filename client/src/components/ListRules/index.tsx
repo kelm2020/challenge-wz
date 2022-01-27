@@ -36,7 +36,7 @@
 //                   <div
 //                     id={rule.id}
 //                     style={style}
-//                     onClick={handleOnClick}
+//                     onClick={handleGetBack}
 //                   > 
 //                     <div>{rule.id}</div>
 //                     <div>{rule.description}</div>
@@ -68,7 +68,7 @@ function TitlebarImageList() {
   const navigate = useNavigate();
   const handleNavigate = (id) => navigate(`/rules/${id}`);
 
-  const handleOnClick = (e: MouseEventImg) => {
+  const handleGetBack = (e: MouseEventImg) => {
     e.preventDefault()
     const idString = e.target.id.toString()
     handleNavigate(idString)
@@ -97,7 +97,7 @@ function TitlebarImageList() {
             id={item.id}
             src={"imagewz.jpeg"}
             alt={item.name}
-            onClick={handleOnClick}
+            onClick={handleGetBack}
             loading="lazy"
             style={{ borderRadius: '8px', cursor: 'pointer' }}
           />

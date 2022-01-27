@@ -1,16 +1,3 @@
-/*
-Author: Eli Elad Elrom
-Website: https://EliElrom.com
-License: MIT License
-Component: src/hooks/WindowDimensions.tsx
-
-Implement:
-
-import useWindowDimensions from '../../hooks/WindowDimensions'
-const { height, width } = useWindowDimensions()
-
-*/
-
 import { useState, useEffect } from 'react'
 
 function getWindowDimensions() {

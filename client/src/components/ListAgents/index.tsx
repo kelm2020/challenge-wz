@@ -28,7 +28,7 @@ const MultiActionAreaCard = () => {
   const navigate = useNavigate();
   const handleNavigate = (id) => navigate(`/agents/${id}`);
 
-  const handleOnClick = (e: MouseEvent) => {
+  const handleGetBack = (e: MouseEvent) => {
     e.preventDefault()
     const idString = e.target.id.toString()
     handleNavigate(idString)
@@ -58,7 +58,7 @@ const MultiActionAreaCard = () => {
                   <div
                     id={agent.id}
                     style={style}
-                    onClick={handleOnClick}
+                    onClick={handleGetBack}
                   >
                     {agent.name}
                   </div>

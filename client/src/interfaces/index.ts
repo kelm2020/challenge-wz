@@ -143,6 +143,9 @@ interface IDonutChartProps {
   propertiesNames: string[]
 }
 
+interface IDetail {
+  eventHandler: (e: any) => void;
+}
 
 export type { 
   Alerts, 
@@ -161,5 +164,6 @@ export type {
   DataChart,
   Dimensions,
   IDonutChartProps,
-  MouseEventButton
+  MouseEventButton,
+  IDetail
 }

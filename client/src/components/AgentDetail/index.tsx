@@ -3,9 +3,9 @@ import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import { CircularProgress } from '@material-ui/core';
-import { DataAgent } from '../../interfaces'
-import { usePrevious } from '../../utils/usePrevious';
 import { useParams } from 'react-router-dom';
+import { DataAgent, IDetail } from '../../interfaces'
+import { usePrevious } from '../../utils';
 
 const style = {
   width: '100%',
@@ -19,7 +19,7 @@ const style = {
 
 const styleTextArea = { width: '100%', height: '400px' };
 
-const AgentModal: FC = () => {
+const AgentModal: FC<IDetail> = ({eventHandler}: IDetail) => {
   const [ dataAgent, setDataAgent ] = useState<DataAgent | undefined>(undefined);
 
   const params = useParams();
@@ -33,11 +33,6 @@ const AgentModal: FC = () => {
       console.error(e);
     }
   }, [id]);
-
-  const handleOnClick = (e) => {
-    e.preventDefault()
-    window && window.history.back();
-  }
 
   const prevId = usePrevious(id);
 
@@ -59,7 +54,7 @@ const AgentModal: FC = () => {
           }
         </>
         <CardActions>
-          <Button onClick={handleOnClick} size="small">Atras</Button>
+          <Button onClick={eventHandler} size="small">Atras</Button>
         </CardActions>
       </Card>
     </div>

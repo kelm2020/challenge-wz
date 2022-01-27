@@ -35,7 +35,7 @@ const BasicTable: FC = () => {
   const navigate = useNavigate();
   const handleNavigate = (id) => navigate(`/alerts/${id}`);
 
-  const handleOnClick = (e: MouseEventButton) => {
+  const handleGetBack = (e: MouseEventButton) => {
     e.preventDefault()
     const idString = e.target.id.toString()
     handleNavigate(idString)
@@ -70,7 +70,7 @@ const BasicTable: FC = () => {
             .map((alert) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={alert._id}>
-                  <TableCell align="center"><button id={alert._id} onClick={handleOnClick}>Detail</button></TableCell>
+                  <TableCell align="center"><button id={alert._id} onClick={handleGetBack}>Detail</button></TableCell>
                   <TableCell align="center" component="th" scope="row">
                     {alert._id}
                   </TableCell>

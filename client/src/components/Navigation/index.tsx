@@ -11,6 +11,7 @@
   import AgentDetail from '../AgentDetail';
   import RuleDetail from '../RuleDetail';
   import AlertDetail from '../AlertDetail';
+  import { handleGetBack } from '../../utils';
 
   import './index.scss';
 
@@ -31,7 +32,7 @@
             <Route path="/agents" element={<ListAgents />} />
             <Route path="/rules" element={<ListRules />} />
             <Route path="/dashboard" element={<DonutChart />} />
-            <Route path="/agents/:id" element={<AgentDetail />} />
+            <Route path="/agents/:id" element={<AgentDetail eventHandler={handleGetBack} />} />
             <Route path="/rules/:id" element={<RuleDetail />} />
           </Routes>
         </div>
