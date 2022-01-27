@@ -21,8 +21,16 @@ npm start
 
 Automaticamente abrira el navegador en http://localhost:3000/ desde donde podemos visualizar el FrontEnd.
 
-La aplicación es responsive, y está construida con React, Typescript, D3 js (para el gráfico) y material-ui.
+La aplicación es responsive, y está construida con React, Typescript, Sass, D3 js (para el gráfico), material-ui.
 
+Los tests están hechos con Jest y React Testing Library.
+
+```
+Correr tests:
+
+```
+npm test
+```
 
 ## Como Correr el servidor
 
